@@ -1,9 +1,10 @@
 import React from "react";
 import image from "../assets/images/img 3.avif";
+import { NavLink } from "react-router-dom";
 
 const Signin = () => {
   return (
-    <div className="bg-red-900 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
+    <div className="bg-blue-300 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
       <div className="max-w-md w-full px-6 py-8 bg-gray-800 rounded-md shadow-md">
         <h2 className="text-3xl text-white font-semibold mb-6">Sign in</h2>
         {/* <form onSubmit={}> */}
@@ -47,8 +48,16 @@ const Signin = () => {
             Sign in
           </button>
         </div>
-        <div>
-          dont have an account? <button>signup here</button>
+        <div className=" text-white text-lg font-bold mb-2 flex justify-center">
+          dont have an account?
+          <button>
+            <NavLink
+              to="/signup"
+              className=" text-white text-lg font-bold mb-2 flex justify-center hover:bg-blue-600"
+            >
+              signup here
+            </NavLink>
+          </button>
         </div>
       </div>
     </div>
