@@ -2,9 +2,11 @@ import React from "react";
 
 const Signup = () => {
   return (
-    <div className="bg-red-900 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
+    <div className="bg-blue-300 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
       <div className="max-w-md w-full px-6 py-8 bg-gray-800 rounded-md shadow-md">
-        <h2 className="text-3xl text-white font-semibold mb-6">Sign in</h2>
+        <h2 className="text-3xl text-white font-semibold mb-6">
+          Create an account
+        </h2>
         {/* <form onSubmit={}> */}
         <div className="mb-4">
           <label
