@@ -1,73 +1,70 @@
-// import instance from "./index";
-// import jwt_decode from "jwt-decode";
+import instance from "./index";
+import jwt_decode from "jwt-decode";
 
-// const registerNew = async (userInfo) => {
-//   try {
-//     const formData = new FormData();
-//     for (const Key in userInfo) formData.append(Key, userInfo[Key]);
-//     const { res } = await instance.post("/auth/v3/register", formData);
-//     storeToken(res.access);
-//     return res;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const registerNew = async (userInfo) => {
+  try {
+    const res = await instance.post("user/signup", userInfo);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-// const login = async (userInfo) => {
-//   try {
-//     const { res } = await instance.post(userInfo);
-//     storeToken(res.access);
-//     return res;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-// const getAllUsers = async () => {
-//   try {
-//     const { res } = await instance.get();
-//     return res;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-// const storeToken = (access) => {
-//   localStorage.setItem("access", access);
-// };
-// const checkToken = () => {
-//   const token = localStorage.getItem("token");
-//   if (token) {
-//     const decode = jwt_decode(token);
+const login = async (userInfo) => {
+  try {
+    const res = await instance.post("/user/signin", userInfo);
 
-//     const currentTime = Date.now() / 10000;
-//     if (decode.exp < currentTime) {
-//       localStorage.removeItem("token");
-//       return false;
-//     }
-//     return true;
-//   }
-//   return false;
-// };
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+const getAllUsers = async () => {
+  try {
+    const res = await instance.get();
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+const storeToken = (access) => {
+  localStorage.setItem("token", access);
+};
+const checkToken = () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    const decode = jwt_decode(token);
 
-// const logOut = () => {
-//   localStorage.removeItem("access");
-// };
+    const currentTime = Date.now() / 10000;
+    if (decode.exp < currentTime) {
+      localStorage.removeItem("token");
+      return false;
+    }
+    return true;
+  }
+  return false;
+};
 
-// const userProfile = async () => {
-//   try {
-//     const { res } = await instance.post("");
-//     storeToken(res.access);
-//     return res;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+const logOut = () => {
+  localStorage.removeItem("access");
+};
 
-// export {
-//   registerNew,
-//   login,
-//   getAllUsers,
-//   logOut,
-//   storeToken,
-//   checkToken,
-//   userProfile,
-// };
+const userProfile = async () => {
+  try {
+    const res = await instance.post("");
+    storeToken(res.access);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export {
+  registerNew,
+  login,
+  getAllUsers,
+  logOut,
+  storeToken,
+  checkToken,
+  userProfile,
+};
