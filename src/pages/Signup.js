@@ -1,37 +1,29 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
-import { registerNew } from "../api/auth";
+import { registerNew, storeToken } from "../api/auth";
 import UserContext from "../context/UserContext";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
   const [user, setUser] = useContext(UserContext);
-
-  const handleChange = (e) => {
-    if (e.target.name === "email") {
-      setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
-    }
-    // else {
-    //   setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
-    // }
-  };
   const { mutate: registerfn } = useMutation({
     mutationFn: () => registerNew(userInfo),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      console.log(data);
+      storeToken(data.token);
       setUser(true);
-      Navigate("/");
+      navigate("/");
     },
   });
+
+  const handleChange = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      userInfo.password &&
-      userInfo.email !== "the Password or email not true"
-    ) {
-      alert("Wrong password or email");
-      return;
-    }
+
     registerfn();
   };
   return (
@@ -43,15 +35,15 @@ const Signup = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
-              htmlFor="email"
+              htmlFor="username"
               className="block text-white text-sm font-medium mb-2"
             >
               Username
             </label>
             <input
-              type="user"
-              name="user"
-              id="user"
+              type="username"
+              name="username"
+              id="username"
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
@@ -91,15 +83,15 @@ const Signup = () => {
           </div>
           <div className="mb-6">
             <label
-              htmlFor="password"
+              htmlFor="confirmpassword"
               className="block text-white text-sm font-medium mb-2"
             >
               Confirm Password
             </label>
             <input
-              name="password"
+              name="confirm_password"
               type="password"
-              id="password"
+              id="cconfirmpassword"
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
