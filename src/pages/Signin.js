@@ -1,92 +1,103 @@
-import React, { useContext, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { login } from "../api/auth";
-import { useMutation } from "@tanstack/react-query";
-import UserContext from "../context/UserContext";
-import { Navigate } from "react-router-dom";
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import image from "../images/bg.avif";
 
-const Signin = () => {
-  const [userInfo, setUserInfo] = useState({});
-  const [user, setUser] = useContext(UserContext);
+// TODO remove, this demo shouldn't need to reset the theme.
 
-  const { mutate: loginFun } = useMutation({
-    mutationFn: () => login(userInfo),
-    onSuccess: () => setUser(true),
-  });
+const defaultTheme = createTheme();
 
-  const handleChange = (e) => {
-    setUserInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+export default function SignIn() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+    });
   };
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    // Add login logic here
-    loginFun();
-  };
-
-  if (user) {
-    return <Navigate to="/" />;
-  }
 
   return (
-    <div className="bg-blue-300 min-h-screen flex items-center justify-center absolute inset-0 z-[-1]">
-      <div className="max-w-md w-full px-6 py-8 bg-gray-800 rounded-md shadow-md">
-        <h2 className="text-3xl text-white font-semibold mb-6">Sign in</h2>
-        <form onSubmit={handleFormSubmit}>
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-white text-sm font-medium mb-2"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="password"
-              className="block text-white text-sm font-medium mb-2"
-            >
-              Password
-            </label>
-            <input
-              name="password"
-              type="password"
-              id="password"
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-            >
+    <div>
+      <img src={image} className="backgroundimage" alt="bg" />
+      <ThemeProvider theme={defaultTheme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+            sx={{
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
               Sign in
-            </button>
-          </div>
-          <div className=" text-white text-lg font-bold mb-2 flex justify-center">
-            dont have an account?
-            <button>
-              <NavLink
-                to="/signup"
-                className=" text-white text-lg font-bold mb-2 flex justify-center hover:bg-blue-600"
+            </Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+              />
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
               >
-                signup here
-              </NavLink>
-            </button>
-          </div>
-        </form>
-      </div>
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs></Grid>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Container>
+      </ThemeProvider>
     </div>
   );
-};
-
-export default Signin;
+}
