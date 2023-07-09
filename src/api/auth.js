@@ -3,11 +3,8 @@ import jwt_decode from "jwt-decode";
 
 const registerNew = async (userInfo) => {
   try {
-    const formData = new FormData();
-    for (const Key in userInfo) formData.append(Key, userInfo[Key]);
-    const { res } = await instance.post("user/signup", formData);
-    storeToken(res.access);
-    return res;
+    const res = await instance.post("user/signup", userInfo);
+    return res.data;
   } catch (error) {
     console.log(error);
   }
@@ -15,23 +12,23 @@ const registerNew = async (userInfo) => {
 
 const login = async (userInfo) => {
   try {
-    const { res } = await instance.post("user/signin", userInfo);
-    storeToken(res.access);
-    return res;
+    const res = await instance.post("/user/signin", userInfo);
+
+    return res.data;
   } catch (error) {
     console.log(error);
   }
 };
 const getAllUsers = async () => {
   try {
-    const { res } = await instance.get();
+    const res = await instance.get();
     return res;
   } catch (error) {
     console.log(error);
   }
 };
 const storeToken = (access) => {
-  localStorage.setItem("access", access);
+  localStorage.setItem("token", access);
 };
 const checkToken = () => {
   const token = localStorage.getItem("token");
@@ -54,7 +51,7 @@ const logOut = () => {
 
 const userProfile = async () => {
   try {
-    const { res } = await instance.post("");
+    const res = await instance.post("");
     storeToken(res.access);
     return res;
   } catch (error) {
