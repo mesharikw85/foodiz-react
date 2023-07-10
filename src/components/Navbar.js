@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink } from "react-router-dom";
 
-const pages = ["signup", "signin"];
+const pages = ["signup", "signin", "recipes"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
@@ -56,6 +56,19 @@ function ResponsiveAppBar() {
             }}
           >
             Foodiez
+          </Typography>
+          <Typography
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            HOME
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

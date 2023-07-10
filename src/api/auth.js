@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 
 const registerNew = async (userInfo) => {
   try {
-    const res = await instance.post("user/signup", userInfo);
+    const res = await instance.post("/user/signup", userInfo);
     return res.data;
   } catch (error) {
     console.log(error);
