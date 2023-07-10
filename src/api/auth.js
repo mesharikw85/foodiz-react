@@ -13,7 +13,6 @@ const registerNew = async (userInfo) => {
 const login = async (userInfo) => {
   try {
     const res = await instance.post("/user/signin", userInfo);
-
     return res.data;
   } catch (error) {
     console.log(error);
@@ -46,7 +45,7 @@ const checkToken = () => {
 };
 
 const logOut = () => {
-  localStorage.removeItem("access");
+  localStorage.removeItem("token");
 };
 
 const userProfile = async () => {
