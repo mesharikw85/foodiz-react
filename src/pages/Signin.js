@@ -13,20 +13,38 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import image from "../images/360_F_378975954_G39M4ptXAjxKy80gbBIEo0wqBkk89gBF.jpg";
+import { useContext, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { login } from "../api/auth";
+import { useMutation } from "@tanstack/react-query";
+import UserContext from "../context/UserContext";
+import { Navigate } from "react-router-dom";
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+const Signin = () => {
+  const [userInfo, setUserInfo] = useState({});
+  const [user, setUser] = useContext(UserContext);
+
+  const { mutate: loginFun } = useMutation({
+    mutationFn: () => login(userInfo),
+    onSuccess: () => setUser(true),
+  });
+
+  const handleChange = (e) => {
+    setUserInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // Add login logic here
+    loginFun();
+  };
+
+  if (user) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div>
@@ -60,7 +78,7 @@ export default function SignIn() {
               </Typography>
               <Box
                 component="form"
-                onSubmit={handleSubmit}
+                onSubmit={handleFormSubmit}
                 noValidate
                 sx={{ mt: 1 }}
               >
@@ -73,6 +91,7 @@ export default function SignIn() {
                   name="email"
                   autoComplete="email"
                   autoFocus
+                  onChange={handleChange}
                 />
                 <TextField
                   margin="normal"
@@ -83,6 +102,7 @@ export default function SignIn() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  onChange={handleChange}
                 />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
@@ -111,4 +131,6 @@ export default function SignIn() {
       </div>
     </div>
   );
-}
+};
+
+export default Signin;

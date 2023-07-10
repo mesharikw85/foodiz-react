@@ -11,20 +11,36 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import image from "../images/bg.avif";
+import { useMutation } from "@tanstack/react-query";
+import { useContext, useState } from "react";
+import { registerNew, storeToken } from "../api/auth";
+import UserContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
-// TODO remove, this demo shouldn't need to reset the theme.
+const Signup = () => {
+  const navigate = useNavigate();
+  const [userInfo, setUserInfo] = useState({});
+  const [user, setUser] = useContext(UserContext);
+  const { mutate: registerfn } = useMutation({
+    mutationFn: () => registerNew(userInfo),
+    onSuccess: () => {
+      if (localStorage.getItem("token")) {
+        setUser(true);
+        navigate("/");
+      }
+    },
+  });
 
-const defaultTheme = createTheme();
-
-export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const handleChange = (e) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    registerfn();
+  };
+
+  const defaultTheme = createTheme();
 
   return (
     <div>
@@ -67,10 +83,11 @@ export default function SignUp() {
                     <TextField
                       required
                       fullWidth
-                      id="Username"
-                      label="Username"
-                      name="Username"
-                      autoComplete="Username"
+                      id="username"
+                      label="username"
+                      name="username"
+                      autoComplete="username"
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
@@ -81,27 +98,31 @@ export default function SignUp() {
                       label="Email Address"
                       name="email"
                       autoComplete="email"
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
                       required
                       fullWidth
-                      id="Password"
-                      label="Password"
-                      name="Password"
-                      autoComplete="Password"
+                      id="password"
+                      label="password"
+                      name="password"
+                      autoComplete="password"
+                      type="password"
+                      onChange={handleChange}
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <TextField
                       required
                       fullWidth
-                      name="Confirm Password"
-                      label="Confirm Password"
-                      type="Confirm Password"
-                      id="Confirm Password"
-                      autoComplete="Confirm Password"
+                      name="confirm password"
+                      label="confirm password"
+                      type="password"
+                      id="confirm password"
+                      autoComplete="confirm password"
+                      onChange={handleChange}
                     />
                   </Grid>
                 </Grid>
@@ -128,4 +149,6 @@ export default function SignUp() {
       </div>
     </div>
   );
-}
+};
+
+export default Signup;

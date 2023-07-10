@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 const registerNew = async (userInfo) => {
   try {
     const res = await instance.post("/user/signup", userInfo);
+    storeToken(res.data.token);
     return res.data;
   } catch (error) {
     console.log(error);

@@ -5,20 +5,29 @@ import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Home from "./pages/Home";
 import Recipes from "./pages/Recipes";
+import { useEffect, useState } from "react";
+import { checkToken } from "./api/auth";
+import UserContext from "./context/UserContext";
 
 function App() {
+  const [user, setUser] = useState(false);
+  useEffect(() => {
+    setUser(checkToken());
+  }, []);
   return (
-    <div>
+    <UserContext.Provider value={[user, setUser]}>
       <div>
-        <ResponsiveAppBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/recipes" element={<Recipes />} />
-        </Routes>
+        <div>
+          <ResponsiveAppBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/recipes" element={<Recipes />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </UserContext.Provider>
   );
 }
 
