@@ -14,6 +14,7 @@ const registerNew = async (userInfo) => {
 const login = async (userInfo) => {
   try {
     const res = await instance.post("/user/signin", userInfo);
+    storeToken(res.data.token);
 
     return res.data;
   } catch (error) {
@@ -47,25 +48,7 @@ const checkToken = () => {
 };
 
 const logOut = () => {
-  localStorage.removeItem("access");
+  localStorage.removeItem("token");
 };
 
-const userProfile = async () => {
-  try {
-    const res = await instance.post("");
-    storeToken(res.access);
-    return res;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export {
-  registerNew,
-  login,
-  getAllUsers,
-  logOut,
-  storeToken,
-  checkToken,
-  userProfile,
-};
+export { registerNew, login, getAllUsers, logOut, storeToken, checkToken };
