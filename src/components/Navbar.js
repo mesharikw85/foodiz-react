@@ -50,7 +50,7 @@ function ResponsiveAppBar() {
       },
     },
     {
-      name: "recipes",
+      name: "categories",
       onClick: () => {
         alert("recipe page");
       },
@@ -118,6 +118,7 @@ function ResponsiveAppBar() {
             >
               <MenuIcon />
             </IconButton>
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -165,22 +166,36 @@ function ResponsiveAppBar() {
             Foodiez
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <NavLink to={page.name} key={page.name}>
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page.name}
-                </Button>
-              </NavLink>
-            ))}
+            {user ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {pages[2].name}
+              </Button>
+            ) : (
+              <>
+                {pages.map((page) => (
+                  <NavLink to={page.name} key={page.name}>
+                    <Button
+                      onClick={handleCloseNavMenu}
+                      sx={{ my: 2, color: "white", display: "block" }}
+                    >
+                      {page.name}
+                    </Button>
+                  </NavLink>
+                ))}
+              </>
+            )}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar
+                  alt="Remy Sharp"
+                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+                />
               </IconButton>
             </Tooltip>
             <Menu
