@@ -52,7 +52,7 @@ function ResponsiveAppBar() {
     {
       name: "categories",
       onClick: () => {
-        alert("recipe page");
+        alert("categories page");
       },
     },
   ];

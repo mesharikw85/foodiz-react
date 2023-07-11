@@ -4,7 +4,7 @@ import ResponsiveAppBar from "./components/Navbar";
 import Signup from "./pages/Signup";
 import Signin from "./pages/Signin";
 import Home from "./pages/Home";
-import Recipes from "./pages/Recipes";
+import Categories from "./pages/Categories";
 import { useEffect, useState } from "react";
 import { checkToken } from "./api/auth";
 import UserContext from "./context/UserContext";
@@ -23,7 +23,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/recipes" element={<Recipes />} />
+            <Route path="/Categories" element={<Categories />} />
           </Routes>
         </div>
       </div>
