@@ -14,7 +14,10 @@ const Home = () => {
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
         }}
-      ></div>
+      >
+        {" "}
+        jfbieor
+      </div>
     </div>
   );
 };

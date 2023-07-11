@@ -93,19 +93,20 @@ function ResponsiveAppBar() {
           >
             Foodiez
           </Typography>
-          <Typography
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            HOME
-          </Typography>
+          <NavLink to="/">
+            <Typography
+              noWrap
+              component="a"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              HOME
+            </Typography>
+          </NavLink>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -167,12 +168,14 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {user ? (
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {pages[2].name}
-              </Button>
+              <NavLink to="/categories">
+                <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {pages[2].name}
+                </Button>
+              </NavLink>
             ) : (
               <>
                 {pages.map((page) => (
