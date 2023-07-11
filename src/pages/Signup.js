@@ -117,7 +117,7 @@ const Signup = () => {
                     <TextField
                       required
                       fullWidth
-                      name="confirm password"
+                      name="confirm_password"
                       label="confirm password"
                       type="password"
                       id="confirm password"
