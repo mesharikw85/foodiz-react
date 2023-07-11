@@ -50,9 +50,9 @@ function ResponsiveAppBar() {
       },
     },
     {
-      name: "recipes",
+      name: "categories",
       onClick: () => {
-        alert("recipe page");
+        alert("categories page");
       },
     },
   ];
