@@ -68,7 +68,7 @@ export default function MediaCard() {
         Categories
         <Button onClick={handleOpen}>Add Category</Button>
       </div>
-      <div className="flex flex-wrap gap-[15px] absolute top-[50%] left-[25%]">
+      <div className="flex flex-wrap gap-[15px] mt-[300px] ml-[300px]">
         {categories?.map((category) => {
           return (
             <Card
@@ -87,7 +87,7 @@ export default function MediaCard() {
               <CardMedia
                 sx={{ height: 250 }}
                 image={`http://localhost:8000/${category.image}`}
-                title="green iguana"
+                title=""
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
