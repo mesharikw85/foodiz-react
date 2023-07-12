@@ -35,7 +35,7 @@ export default function MediaCard() {
           transform: "translate(-50%, -50%)",
         }}
       >
-        <CardMedia sx={{ height: 250 }} image={image} title="green iguana" />
+        <CardMedia sx={{ height: 250 }} image={image} title="" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             Lizard
@@ -65,7 +65,7 @@ export default function MediaCard() {
           transform: "translate(-50%, -50%)",
         }}
       >
-        <CardMedia sx={{ height: 250 }} image={image} title="green iguana" />
+        <CardMedia sx={{ height: 250 }} image={image} title="" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             Lizard
@@ -95,7 +95,7 @@ export default function MediaCard() {
           transform: "translate(59%, -50%)",
         }}
       >
-        <CardMedia sx={{ height: 250 }} image={image} title="green iguana" />
+        <CardMedia sx={{ height: 250 }} image={image} title="" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             Lizard
