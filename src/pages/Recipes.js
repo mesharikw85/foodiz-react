@@ -127,8 +127,7 @@ export default function MediaCard() {
             <Typography variant="body2" color="text.secondary">
               8 ounces (225 grams) pasta of your choice (e.g., spaghetti, penne,
               fettuccine), 2 tablespoons olive oil, 3 cloves garlic, minced, 1
-              small onion, finely chopped, 1 can (14 ounces) diced tomatoes, 1
-              teaspoon dried basil
+              small onion, finely chopped,
             </Typography>
           </CardContent>
           <CardActions>

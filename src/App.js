@@ -10,7 +10,8 @@ import { checkToken } from "./api/auth";
 import UserContext from "./context/UserContext";
 import Recipes from "./pages/Recipes";
 import American from "./pages/AmericanRecipes";
-
+import Italian from "./pages/ItalianRecipes";
+import Mexican from "./pages/MexicanRecipes";
 function App() {
   const [user, setUser] = useState(false);
   useEffect(() => {
@@ -27,7 +28,9 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/recipes" element={<Recipes />} />
-            <Route path="/categories/american" element={<American />} />
+            <Route path="/categories/recipes/american" element={<American />} />
+            <Route path="/categories/recipes/italian" element={<Italian />} />
+            <Route path="/categories/recipes/mexican" element={<Mexican />} />
           </Routes>
         </div>
       </div>

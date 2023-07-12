@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../images/homeBG2.jpg";
+import image from "../assets/images/homeBG2.jpg";
 import DisableElevation from "../components/Button";
 
 const Home = () => {

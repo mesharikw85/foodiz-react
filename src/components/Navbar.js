@@ -171,14 +171,24 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {user ? (
-              <NavLink to="/categories">
-                <Button
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {pages[2].name}
-                </Button>
-              </NavLink>
+              <>
+                <NavLink to="/categories">
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    {pages[2].name}
+                  </Button>
+                </NavLink>
+                <NavLink to="/recipes">
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, color: "white", display: "block" }}
+                  >
+                    recipes
+                  </Button>
+                </NavLink>
+              </>
             ) : (
               <>
                 {pages.map((page) => (

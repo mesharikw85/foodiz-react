@@ -96,7 +96,7 @@ export default function MediaCard() {
                 <Typography variant="body2" color="text.secondary"></Typography>
               </CardContent>
               <CardActions>
-                <NavLink to="recipes">
+                <NavLink to={`recipes/${category.name}`}>
                   <Button size="small">View Recipes</Button>
                 </NavLink>
               </CardActions>
