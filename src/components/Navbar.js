@@ -55,6 +55,9 @@ function ResponsiveAppBar() {
         alert("categories page");
       },
     },
+    {
+      name: "recipes",
+    },
   ];
   const settings = [
     {
