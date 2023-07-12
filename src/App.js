@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { checkToken } from "./api/auth";
 import UserContext from "./context/UserContext";
 import Recipes from "./pages/Recipes";
+import American from "./pages/AmericanRecipes";
 
 function App() {
   const [user, setUser] = useState(false);
@@ -24,8 +25,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/Categories" element={<Categories />} />
+            <Route path="/categories" element={<Categories />} />
             <Route path="/recipes" element={<Recipes />} />
+            <Route path="/categories/american" element={<American />} />
           </Routes>
         </div>
       </div>
